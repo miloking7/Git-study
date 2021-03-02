@@ -1,0 +1,15 @@
+bug 
+
+2021-02-08발견 -  댓글 보기시에 히트 수 증가 되지 않음
+ 				 어떤 댓글은 히트 수 증가가 잘되고 있음 
+ 				 
+2021-02-08 위 문제 해결: 원인 아래 SQL질의에서 BHIT 초기값 0을 주지않아 NULL 인 상태에서 1씩 증가되지 않았기 때문 
+	<insert id="reply" >
+		insert into mvc_board (bId, bName, bTitle, bContent,bDate, bHit, bGroup, bStep, bIndent)
+		values (mvc_board_seq.nextval, #{param2}, #{param3}, #{param4},sysdate, 0, #{param5} ,#{param6}+1 ,#{param7}+1)
+	</insert> 
+	
+	로 수정 함 
+
+ 				 
+ 				 
